@@ -1,0 +1,246 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Ocultar a barra de rolagem */
+    background-color: #80808054; /* Fundo escuro para realçar o efeito */
+}
+
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.container {
+    position: relative;
+    text-align: center; /* Centralizar o conteúdo da container */
+    z-index: 1; /* Garantir que o conteúdo fique acima das partículas */
+}
+
+.title {
+    font-size: 4rem;
+    color: #fff;
+    margin-bottom: 20px;
+    transition: transform 0.5s, color 0.5s; /* Transição suave para transformação e cor */
+}
+
+/* Efeito 3D */
+.title:hover {
+    transform: rotateX(15deg) rotateY(15deg) scale(1.1); /* Efeito 3D ao passar o mouse */
+    color: #4827c0; /* Cor do texto ao passar o mouse */
+}
+
+.search-bar {
+    background: rgba(255, 255, 255, 0.2); /* Fundo leve para a barra de pesquisa */
+    padding: 2px; /* Adiciona preenchimento interno */
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* Ajusta a sombra para um efeito mais visível */
+    width: 500px; /* Define a largura da barra de pesquisa */
+    display: flex; /* Mantém o layout flexível para os elementos internos */
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+}
+
+.search-bar input {
+    width: 100%; /* Faz com que o campo de texto ocupe toda a largura disponível */
+    height: 40px; /* Define a altura do campo de texto */
+    border: none; /* Remove a borda padrão */
+    outline: none; /* Remove o contorno padrão */
+    padding: 0 10px; /* Adiciona preenchimento interno */
+    font-size: 1rem; /* Ajusta o tamanho do texto */
+    border-radius: 15px; /* Adiciona bordas arredondadas */
+}
+
+.voltage-button {
+    position: relative;
+    display: inline-block;
+}
+
+.voltage-button button {
+    color: white;
+    background: #170746; /* Cor de fundo azul-escuro */
+    padding: 0.7rem 1.5rem; /* Diminui o preenchimento interno do botão */
+    border-radius: 30px; /* Diminui o arredondamento das bordas */
+    border: 2px solid #e600ee; /* Borda azul clara */
+    font-size: 1rem; /* Diminui o tamanho da fonte */
+    line-height: 1em;
+    letter-spacing: 0.05em; /* Diminui o espaçamento entre letras */
+    transition: background 0.3s, border 0.3s;
+}
+
+.voltage-button button:hover {
+    cursor: pointer;
+    background: #00ff0d; /* Muda o fundo para azul mais claro no hover */
+    border-color: #0D1127; /* Muda a cor da borda no hover */
+}
+
+.voltage-button button:hover + svg, .voltage-button button:hover + svg + .dots {
+    opacity: 1;
+}
+
+.voltage-button svg {
+    display: block;
+    position: absolute;
+    top: -0.75em;
+    left: -0.25em;
+    width: calc(100% + 0.5em);
+    height: calc(100% + 1.5em);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    transition-delay: 0.1s;
+}
+
+.voltage-button svg path {
+    stroke-dasharray: 100;
+    filter: url("#glow");
+}
+
+.voltage-button svg path.line-1 {
+    stroke: #f6de8d;
+    stroke-dashoffset: 0;
+    animation: spark-1 3s linear infinite;
+}
+
+.voltage-button svg path.line-2 {
+    stroke: #6bfeff;
+    stroke-dashoffset: 500;
+    animation: spark-2 3s linear infinite;
+}
+
+.voltage-button .dots {
+    opacity: 0;
+    transition: opacity 0.3s;
+    transition-delay: 0.4s;
+}
+
+.voltage-button .dots .dot {
+    width: 1rem;
+    height: 1rem;
+    background: white;
+    border-radius: 100%;
+    position: absolute;
+    opacity: 0;
+}
+
+.voltage-button .dots .dot-1 {
+    top: 0;
+    left: 20%;
+    animation: fly-up 3s linear infinite;
+}
+
+.voltage-button .dots .dot-2 {
+    top: 0;
+    left: 55%;
+    animation: fly-up 3s linear infinite;
+    animation-delay: 0.5s;
+}
+
+.voltage-button .dots .dot-3 {
+    top: 0;
+    left: 80%;
+    animation: fly-up 3s linear infinite;
+    animation-delay: 1s;
+}
+
+.voltage-button .dots .dot-4 {
+    bottom: 0;
+    left: 30%;
+    animation: fly-down 3s linear infinite;
+    animation-delay: 2.5s;
+}
+
+.voltage-button .dots .dot-5 {
+    bottom: 0;
+    left: 65%;
+    animation: fly-down 3s linear infinite;
+    animation-delay: 1.5s;
+}
+
+
+@keyframes spark-1 {
+    to {
+        stroke-dashoffset: -1000;
+    }
+}
+
+@keyframes spark-2 {
+    to {
+        stroke-dashoffset: -500;
+    }
+}
+
+@keyframes fly-up {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.2);
+    }
+
+    5% {
+        opacity: 1;
+        transform: translateY(-1.5rem) scale(0.4);
+    }
+
+    10%, 100% {
+        opacity: 0;
+        transform: translateY(-3rem) scale(0.2);
+    }
+}
+
+@keyframes fly-down {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.2);
+    }
+
+    5% {
+        opacity: 1;
+        transform: translateY(1.5rem) scale(0.4);
+    }
+
+    10%, 100% {
+        opacity: 0;
+        transform: translateY(3rem) scale(0.2);
+    }
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.glass-footer {
+    width: 100%;
+    padding: 10px; /* Ajusta o preenchimento interno */
+    background: rgba(255, 255, 255, 0.2); /* Aumenta a opacidade do fundo para um efeito glass mais visível */
+    border-radius: 10px;
+    backdrop-filter: blur(10px); /* Aumenta o nível de desfoque */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ajusta a sombra para um efeito mais evidente */
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.glass-footer a {
+    color: #e600ee;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.glass-footer a:hover {
+    text-decoration: underline;
+}
